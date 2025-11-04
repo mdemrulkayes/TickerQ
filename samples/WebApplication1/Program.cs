@@ -26,23 +26,18 @@ builder.Services.AddTickerQ(opt =>
         config.MaxConcurrency = 5;
     });
 
-    opt.AddOperationalStore(dbConfig => {
-        //dbConfig.UseApplicationDbContext<ConveneDbContext>(TickerQ.EntityFrameworkCore.Customizer.ConfigurationType.UseModelCustomizer);
+    opt.AddOperationalStore(dbConfig =>
+    {
+        dbConfig.UseApplicationDbContext<ConveneDbContext>(TickerQ.EntityFrameworkCore.Customizer.ConfigurationType.UseModelCustomizer);
 
-        dbConfig.UseTickerQDbContext<ConveneDbContext>(optionAction =>
-        {
-            optionAction.UseSqlServer(builder.Configuration.GetConnectionString("ConveneDbContext"));
-        });
+        //dbConfig.UseTickerQDbContext<ConveneDbContext>(optionAction =>
+        //{
+        //    optionAction.UseSqlServer(builder.Configuration.GetConnectionString("ConveneDbContext"));
+        //});
+
         dbConfig.IgnoreSeedDefinedCronTickers();
 
-        dbConfig.UseTickerSeeder(
-            async timeTicker => await timeTicker.AddAsync(new TimeTickerEntity {
-                Id = Guid.NewGuid(),
-                Function = "CleanUpLogs",
-                ExecutionTime = DateTime.Now.AddSeconds(30)
-            })
-            ,
-            async cornSeeder =>
+        dbConfig.UseTickerSeeder(async cornSeeder =>
         {
             await cornSeeder.AddAsync(new CronTickerEntity
             {
@@ -76,6 +71,7 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
+app.UseTickerQ();
 app.UseHttpsRedirection();
 
 app.UseAuthorization();

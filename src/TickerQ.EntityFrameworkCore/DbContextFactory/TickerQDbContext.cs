@@ -32,3 +32,23 @@ public class TickerQDbContext : TickerQDbContext<TimeTickerEntity, CronTickerEnt
     {
     }
 }
+
+public class TickerQDbContext<TDbContext, TTimeTicker, TCronTicker> : TickerQDbContext<TimeTickerEntity, CronTickerEntity>
+    where TDbContext : DbContext
+    where TTimeTicker : TimeTickerEntity<TTimeTicker>, new()
+    where TCronTicker : CronTickerEntity, new()
+{
+    public TickerQDbContext(DbContextOptions<TDbContext> options) : base(options)
+    {
+    }
+
+    protected override void OnModelCreating(ModelBuilder modelBuilder)
+    {
+        var schema = this.GetService<TickerQEfCoreOptionBuilder<TTimeTicker, TCronTicker>>().Schema;
+
+        modelBuilder.ApplyConfiguration(new TimeTickerConfigurations<TTimeTicker>(schema));
+        modelBuilder.ApplyConfiguration(new CronTickerConfigurations<TCronTicker>(schema));
+        modelBuilder.ApplyConfiguration(new CronTickerOccurrenceConfigurations<TCronTicker>(schema));
+        base.OnModelCreating(modelBuilder);
+    }
+}

@@ -3,6 +3,6 @@ using TickerQ.EntityFrameworkCore.DbContextFactory;
 
 namespace WebApplication1;
 
-public class ConveneDbContext(DbContextOptions<TickerQDbContext> options) : TickerQDbContext(options)
+public class ConveneDbContext(DbContextOptions<ConveneDbContext> options) : DbContext(options)
 {
 }

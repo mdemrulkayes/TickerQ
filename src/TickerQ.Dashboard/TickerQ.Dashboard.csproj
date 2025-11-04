@@ -19,12 +19,8 @@
     </ItemGroup>
 
     <ItemGroup>
-        <None Remove="wwwroot\src\**\*" />
-        <None Remove="wwwroot\node_modules\**\*" />
-        <None Remove="wwwroot\**\.vite\**\*" />
-        <None Remove="wwwroot\**\*.map" />
-        <None Remove="wwwroot\*" />
-        <None Remove="wwwroot\public\*" />
+      <Content Include="wwwroot\.vite\deps\package.json" />
+      <Content Include="wwwroot\.vite\deps\_metadata.json" />
     </ItemGroup>
 
 </Project>
