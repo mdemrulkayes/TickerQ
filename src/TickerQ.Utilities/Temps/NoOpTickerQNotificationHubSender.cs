@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Text.Json;
 using System.Threading.Tasks;
 using TickerQ.Utilities.Entities;
 using TickerQ.Utilities.Interfaces;
@@ -44,23 +45,23 @@ namespace TickerQ.Utilities.Temps
             return Task.CompletedTask;
         }
 
-        public void UpdateActiveThreads(object activeThreads)
+        public void UpdateActiveThreads(string activeThreads)
         {
         }
 
-        public void UpdateNextOccurrence(object nextOccurrence)
+        public void UpdateNextOccurrence(DateTime? nextOccurrence)
         {
         }
 
-        public void UpdateHostStatus(object active)
+        public void UpdateHostStatus(bool active)
         {
         }
 
-        public void UpdateHostException(object exceptionMessage)
+        public void UpdateHostException(string exceptionMessage)
         {
         }
 
-        public Task UpdateNodeHeartBeatAsync(object nodeHeartBeat)
+        public Task UpdateNodeHeartBeatAsync(JsonElement nodeHeartBeat)
         {
             return Task.CompletedTask;
         }

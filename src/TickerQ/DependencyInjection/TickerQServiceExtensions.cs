@@ -135,15 +135,15 @@ namespace TickerQ.DependencyInjection
                 {
                     if (type == CoreNotifyActionType.NotifyHostExceptionMessage)
                     {
-                        notificationHubSender.UpdateHostException(value);
+                        notificationHubSender.UpdateHostException((string)value);
                         tickerExecutionContext.LastHostExceptionMessage = (string)value;
                     }
                     else if (type == CoreNotifyActionType.NotifyNextOccurence)
-                        notificationHubSender.UpdateNextOccurrence(value);
+                        notificationHubSender.UpdateNextOccurrence(value is DateTime dt ? (DateTime?)dt : null);
                     else if (type == CoreNotifyActionType.NotifyHostStatus)
-                        notificationHubSender.UpdateHostStatus(value);
+                        notificationHubSender.UpdateHostStatus(value is bool b && b);
                     else if (type == CoreNotifyActionType.NotifyThreadCount)
-                        notificationHubSender.UpdateActiveThreads(value);
+                        notificationHubSender.UpdateActiveThreads((string)value);
                 };
             }
             // If background services are not registered (due to DisableBackgroundServices()),

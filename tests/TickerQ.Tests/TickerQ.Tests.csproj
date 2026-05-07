@@ -7,6 +7,10 @@
     </PropertyGroup>
 
     <ItemGroup>
+        <FrameworkReference Include="Microsoft.AspNetCore.App" />
+    </ItemGroup>
+
+    <ItemGroup>
         <PackageReference Include="coverlet.collector" Version="6.0.4" />
         <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="$(DotNetVersion)" />
         <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.14.1" />
@@ -21,6 +25,7 @@
     </ItemGroup>
 
     <ItemGroup>
+      <ProjectReference Include="..\..\src\TickerQ.Caching.StackExchangeRedis\TickerQ.Caching.StackExchangeRedis.csproj" />
       <ProjectReference Include="..\..\src\TickerQ.Dashboard\TickerQ.Dashboard.csproj" />
       <ProjectReference Include="..\..\src\TickerQ.Utilities\TickerQ.Utilities.csproj" />
       <ProjectReference Include="..\..\src\TickerQ\TickerQ.csproj" />

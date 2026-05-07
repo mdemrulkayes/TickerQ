@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Text.Json.Serialization;
+using TickerQ.Dashboard.Hubs;
 using TickerQ.Utilities.DashboardDtos;
 using TickerQ.Utilities.Entities;
 using TickerQ.Utilities.Entities.BaseEntity;
@@ -38,6 +39,8 @@ namespace TickerQ.Dashboard.Infrastructure;
 [JsonSerializable(typeof(CronOccurrenceTickerGraphData))]
 [JsonSerializable(typeof(CronOccurrenceTickerGraphData[]))]
 [JsonSerializable(typeof(IList<CronOccurrenceTickerGraphData>))]
+// Hub notification DTOs
+[JsonSerializable(typeof(CronOccurrenceUpdateNotification))]
 // Entity types (base classes for serialization)
 [JsonSerializable(typeof(BaseTickerEntity))]
 [JsonSerializable(typeof(TimeTickerEntity))]

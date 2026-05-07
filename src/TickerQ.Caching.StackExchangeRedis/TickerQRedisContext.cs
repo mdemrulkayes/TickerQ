@@ -39,7 +39,8 @@ internal class TickerQRedisContext : ITickerQRedisContext
             Ts = DateTimeOffset.UtcNow.ToUnixTimeMilliseconds(), Node = node
         };
 
-        await _notificationHubSender.UpdateNodeHeartBeatAsync(payload);
+        var jsonElement = JsonSerializer.SerializeToElement(payload, RedisContextJsonSerializerContext.Default.NodeHeartbeatPayload);
+        await _notificationHubSender.UpdateNodeHeartBeatAsync(jsonElement);
 
         var interval = _tickerQRedisOptionBuilder.NodeHeartbeatInterval;
         var ttl      = TimeSpan.FromSeconds(interval.TotalSeconds + 20);
@@ -167,6 +168,7 @@ internal sealed class NodeHeartbeatPayload
 [JsonSerializable(typeof(TimeTickerEntity))]
 [JsonSerializable(typeof(TimeTickerEntity[]))]
 [JsonSerializable(typeof(List<TimeTickerEntity>))]
+[JsonSerializable(typeof(ICollection<TimeTickerEntity>))]
 [JsonSerializable(typeof(CronTickerEntity))]
 [JsonSerializable(typeof(CronTickerEntity[]))]
 [JsonSerializable(typeof(CronTickerOccurrenceEntity<CronTickerEntity>))]
